@@ -1,0 +1,379 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeCraft Academy</title>
+    <meta name="description" content="CodeCraft Academy " />
+    <link rel="icon" href="./assets/img/favicon.png" type="image/x-icon" />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+  </head>
+  <body onload="changeTab(1)">
+    <!-- Navbar -->
+    <header>
+      <nav class="nav">
+        <div class="nav-container">
+          <div class="nav-logo">
+            <img src="./assets/img/logo.png" alt="ABC Logo" />
+          </div>
+          <ul class="main-nav mobile-nav">
+            <li>
+              <a href="">Home</a>
+            </li>
+            <li>
+              <a href="">Partner</a>
+            </li>
+            <li>
+              <a href="">About</a>
+            </li>
+            <li>
+              <a href="">Contact</a>
+            </li>
+          </ul>
+          <button class="hamburger" id="hamburgerBtn" aria-label="navbar-hamburger">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
+          <button class="close" id="closeBtn"></button>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <!-- Hero Banner -->
+      <section id="hero-banner">
+        <div class="hero-container">
+          <div class="hero-content">
+            <h1>Unlock Your Potential with CodeCraft Academy</h1>
+            <p>Join us today and embark on a transformative journey that will shape your future in the world of software engineering.</p>
+            <button class="hero-btn">Explore Now!</button>
+          </div>
+          <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="hero banner image" />
+          </div>
+        </div>
+      </section>
+      <!-- Counter -->
+      <section id="counters">
+        <div class="counter-container">
+          <div id="item1">
+            <span>9000+</span>
+            <p>Students</p>
+          </div>
+          <div id="item2">
+            <span>100+</span>
+            <p>Instructors</p>
+          </div>
+          <div id="item3">
+            <span>90%</span>
+            <p>Completion rate</p>
+          </div>
+          <div id="item4">
+            <span>1000+</span>
+            <p>Enterprise</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Partner -->
+      <section id="partners">
+        <div class="partner-container">
+          <div id="item1">
+            <img src="assets/img/google.png" alt="google logo" />
+          </div>
+          <div id="item2">
+            <img width="100" height="100" src="https://img.icons8.com/color/100/amazon-web-services.png" alt="amazon-web-services" />
+          </div>
+          <div id="item3">
+            <img width="100" height="60" src="assets/img/facebook-logo.jpg" alt="facebook logo" />
+          </div>
+          <div id="item4">
+            <img width="120" height="75" src="assets/img/microsoft.png" alt="microsoft logo" />
+          </div>
+          <div id="item5">
+            <img width="80" height="80" src="assets/img/revo.png" alt="revoU logo" />
+          </div>
+          <div id="item6">
+            <img width="120" height="40" src="assets/img/gojek-logo.png" alt="gojek logo" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Join CodeCraft -->
+      <section id="aboutCompany">
+        <div class="center">
+          <h2>Why Join CodeCraft?</h2>
+        </div>
+        <div class="flex-wrapper">
+          <div class="why-container">
+            <div class="why-card">
+              <div class="why-img">
+                <img
+                  src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80"
+                  alt="first reason why join CodeCraft Academy"
+                />
+              </div>
+              <div class="why-content">
+                <h3>Industry-Driven Curriculum</h3>
+                <p>
+                  Our courses are designed in collaboration with industry professionals to ensure they cover the most relevant and in-demand skills needed in the software engineering field. You'll learn the tools and technologies that
+                  companies are actively seeking.
+                </p>
+              </div>
+            </div>
+            <div class="why-card">
+              <div class="why-img">
+                <img
+                  src="https://images.unsplash.com/photo-1605711285791-0219e80e43a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80"
+                  alt="second reason why join CodeCraft Academy"
+                />
+              </div>
+              <div class="why-content">
+                <h3>Experienced Instructors</h3>
+                <p>
+                  Our instructors have extensive experience working in the software engineering industry. They bring real-world knowledge and insights to the classroom, providing you with valuable guidance and mentorship throughout your
+                  learning journey.
+                </p>
+              </div>
+            </div>
+            <div class="why-card">
+              <div class="why-img">
+                <img
+                  src="https://images.unsplash.com/photo-1513128034602-7814ccaddd4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80"
+                  alt="third reason why join CodeCraft Academy"
+                />
+              </div>
+              <div class="why-content">
+                <h3>Career Support</h3>
+                <p>
+                  We go beyond teaching technical skills. Our academy offers comprehensive career support, including resume reviews, interview preparation, and job placement assistance. We're dedicated to helping you launch a successful
+                  career in software engineering.
+                </p>
+              </div>
+            </div>
+            <div class="why-card">
+              <div class="why-img">
+                <img
+                  src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                  alt="fourth reason why join CodeCraft Academy"
+                />
+              </div>
+              <div class="why-content">
+                <h3>Lifelong Learning Community</h3>
+                <p>
+                  Joining CodeCraft Academy means joining a lifelong learning community. Even after completing your course, you'll have access to resources, alumni support, and ongoing learning opportunities, ensuring that your education
+                  and professional development continue long after graduation.
+                </p>
+              </div>
+            </div>
+            <div class="why-card">
+              <div class="why-img">
+                <img
+                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
+                  alt="fifth reason why join CodeCraft Academy"
+                />
+              </div>
+              <div class="why-content">
+                <h3>Continuous Learning</h3>
+                <p>
+                  Technology is constantly evolving, and staying up to date is crucial in the software engineering field. As a student at CodeCraft Academy, you'll have access to ongoing learning resources, workshops, and alumni events to
+                  help you stay current and continuously enhance your skills.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Course List -->
+      <section id="courses">
+        <div class="center">
+          <h4>Our Courses</h4>
+        </div>
+        <div class="flex-wrapper">
+          <div class="course-container">
+            <div class="tabs">
+              <button class="tab" id="item1" onclick="changeTab(1)">
+                <p>Front-End Web Developer</p>
+              </button>
+              <button class="tab" id="item2" onclick="changeTab(2)">
+                <p>Back-End Web Developer</p>
+              </button>
+            </div>
+            <div class="course-content">
+              <div class="tab-content" id="content1">
+                <div class="tab-head">
+                  <h4>Front-End Web Developer</h4>
+                  <div class="course-icon">
+                    <i class="far fa-user" style="color: #b7c9e4"></i>
+                    <span>6000+ Applied</span>
+                  </div>
+                  <button class="course-btn">Learn More!</button>
+                </div>
+                <div class="tab-detail">
+                  <p>
+                    Become a Front-End Web Developer at CodeCraft Academy and master the art of creating visually stunning and interactive websites. In this comprehensive course, you will learn the fundamental building blocks of web
+                    development, including HTML, CSS, and JavaScript. Dive into responsive design, user experience principles, and the latest front-end frameworks. Gain hands-on experience through projects that will sharpen your skills in
+                    creating intuitive user interfaces and optimizing website performance. With our Front-End Web Developer course, you'll be equipped with the tools to bring captivating web experiences to life.
+                  </p>
+                </div>
+                <div class="res-grid">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="html-icon" />
+                </div>
+                <div class="res-grid">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="css-icon" />
+                </div>
+                <div class="res-grid" id="grid-item1">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="js-icon" />
+                </div>
+              </div>
+
+              <div class="tab-content" id="content2">
+                <div class="tab-head">
+                  <h4>Back-End Web Developer</h4>
+                  <div class="course-icon">
+                    <i class="far fa-user" style="color: #b7c9e4"></i>
+                    <span>4000+ Applied</span>
+                  </div>
+                  <button class="course-btn">Learn More!</button>
+                </div>
+                <div class="tab-detail">
+                  <p>
+                    Take your programming skills to the next level with our Back-End Web Developer course at CodeCraft Academy. Explore the server-side of web development and learn the technologies that power dynamic websites and web
+                    applications. Dive into languages like php, Java, or JavaScript, and discover how to design and implement robust databases. Learn about server management, security, and performance optimization techniques. Through
+                    hands-on projects, you'll gain practical experience in building scalable APIs, handling data, and integrating various systems. With our Back-End Web Developer course, you'll be ready to tackle the complexities of the web
+                    and create powerful server-side solutions.
+                  </p>
+                </div>
+                <div class="res-grid">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="js-icon" />
+                </div>
+                <div class="res-grid">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-plain.svg" alt="php-icon" />
+                </div>
+                <div class="res-grid">
+                  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original-wordmark.svg" alt="java-icon" />
+                </div>
+              </div>
+            </div>
+
+            <!-- mobile view< -->
+            <div class="course-mobile-container">
+              <div class="course-mobile-card">
+                <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="front-end course image" />
+                <div class="course-mobile-content">
+                  <h4>Front-End Web Developer</h4>
+                  <p>
+                    Become a Front-End Web Developer at CodeCraft Academy and master the art of creating visually stunning and interactive websites. In this comprehensive course, you will learn the fundamental building blocks of web
+                    development, including HTML, CSS, and JavaScript. Dive into responsive design, user experience principles, and the latest front-end frameworks. Gain hands-on experience through projects that will sharpen your skills in
+                    creating intuitive user interfaces and optimizing website performance. With our Front-End Web Developer course, you'll be equipped with the tools to bring captivating web experiences to life.
+                  </p>
+                  <hr />
+                  <div class="course-mobile-icon">
+                    <div>
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="html-icon" />
+                    </div>
+                    <div>
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="css-icon" />
+                    </div>
+                    <div>
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="js-icon" />
+                    </div>
+                  </div>
+
+                  <button class="course-mobile-btn">Learn More!</button>
+                </div>
+              </div>
+              <div class="course-mobile-card">
+                <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="back-end course img" />
+                <div class="course-mobile-content">
+                  <h4>Back-End Web Developer</h4>
+                  <p>
+                    Take your programming skills to the next level with our Back-End Web Developer course at CodeCraft Academy. Explore the server-side of web development and learn the technologies that power dynamic websites and web
+                    applications. Dive into languages like php, Java, or JavaScript, and discover how to design and implement robust databases. Learn about server management, security, and performance optimization techniques. Through
+                    hands-on projects, you'll gain practical experience in building scalable APIs, handling data, and integrating various systems. With our Back-End Web Developer course, you'll be ready to tackle the complexities of the web
+                    and create powerful server-side solutions.
+                  </p>
+                  <hr />
+                  <div class="course-mobile-icon">
+                    <div>
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="js-icon" />
+                    </div>
+                    <div>
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-plain.svg" alt="php-icon" />
+                    </div>
+                    <div>
+                      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original-wordmark.svg" alt="java-icon" />
+                    </div>
+                  </div>
+
+                  <button class="course-mobile-btn">Learn More!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Us -->
+      <section id="contact">
+        <div class="flex-wrapper">
+          <div class="contact-container">
+            <div>
+              <h5>
+                Enroll Today <br />
+                Begin Your Journey with CodeCraft Academy
+              </h5>
+            </div>
+            <div>
+              <button class="hero-btn" id="btn-contact">Apply Now!</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <img src="assets/img/favicon.png" alt="footer logo" />
+            <h5>
+              CodeCraft <br />
+              Academy
+            </h5>
+          </div>
+          <div class="credit">
+            <span>Courses</span>
+            <a href="#"><i class="fab fa-react" id="fa-footer" style="color: #ffffff"></i>Front-End Web Developer</a>
+            <a href="#"><i class="fab fa-react" id="fa-footer" style="color: #ffffff"></i>Front-End Web Developer</a>
+          </div>
+          <div class="credit mobile-credit">
+            <span>Navigation</span>
+            <a href="#"><i class="fas fa-home" id="fa-footer" style="color: #ffffff"></i>Home</a>
+            <a href="#"><i class="fas fa-phone" id="fa-footer" style="color: #ffffff"></i>Contact Us</a>
+            <a href="#"><i class="fas fa-address-card" id="fa-footer" style="color: #ffffff"></i>About Us</a>
+            <a href="#"><i class="fas fa-handshake" id="fa-footer" style="color: #ffffff"></i>Partners</a>
+          </div>
+          <div class="credit">
+            <span>Social Media</span>
+            <a href="#"><i class="fab fa-facebook" id="fa-footer" style="color: #ffffff"></i>Facebook</a>
+            <a href="#"><i class="fab fa-instagram" id="fa-footer" style="color: #ffffff"></i>Instagram</a>
+            <a href="#"><i class="fab fa-twitter" id="fa-footer" style="color: #ffffff"></i>Twitter</a>
+            <a href="#"><i class="fab fa-discord" id="fa-footer" style="color: #ffffff"></i>Discord</a>
+            <a href="#"><i class="fab fa-whatsapp" id="fa-footer" style="color: #ffffff"></i>Whatsapp</a>
+          </div>
+        </div>
+        <hr />
+        <div class="footer-copyright">
+          <p>Created by Steffansim, © All Rights Reserved 2023.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Script -->
+    <script src="assets/js/script.js" type="text/javascript"></script>
+  </body>
+</html>

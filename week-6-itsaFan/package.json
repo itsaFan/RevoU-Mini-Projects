@@ -1,0 +1,11 @@
+{
+  "name": "steff-docker-app",
+  "version": "1.0.0",
+  "description": "Assignment NodeJS on Docker",
+  "author": "Steffansim",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {}
+}
