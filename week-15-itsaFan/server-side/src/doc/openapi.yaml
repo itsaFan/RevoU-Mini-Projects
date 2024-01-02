@@ -1,0 +1,628 @@
+openapi: 3.0.0
+info:
+  title: Steffan-Week11-API-Docs
+  version: 1.0.0
+  description: Steffansim, Week 11 RevoU Assignment - API for managing projects and assigning tasks to developers/employee
+servers:
+  - url: https://team-collaboration-api-production.up.railway.app/
+    description: Production or Deployment Server
+  - url: http://localhost:3000
+    description: Development Server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: "Bearer with JWT Token"
+  schemas:
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+          pattern: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]+$"
+        role:
+          type: string
+          enum:
+            - user
+            - leader
+            - admin
+      required:
+        - username
+        - email
+        - password
+    Group:
+      type: object
+      properties:
+        name:
+          type: string
+        admin:
+          type: string
+        leader:
+          type: string
+        members:
+          type: array
+          items:
+            type: string
+    Project:
+      type: object
+      properties:
+        projectName:
+          type: string
+        assignedGroup:
+          type: string
+    Task:
+      type: object
+      properties:
+        project:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        dueDate:
+          type: string
+          format: date-time
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+        status:
+          type: string
+          enum:
+            - pending
+            - in-progress
+            - completed
+        assignedTo:
+          type: string
+        createdBy:
+          type: string
+        group:
+          type: string
+paths:
+  /api/register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "201":
+          description: User registered successfully
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+  /api/login:
+    post:
+      summary: Login or signin user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                  minLength: 8
+              required:
+                - username
+                - password
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized or Wrong Credentials
+        "500":
+          description: Internal Server Error
+  /api/me:
+    get:
+      summary: Get current user data
+      description: Retrieve data of the currently authenticated user.
+      security:
+        - bearerAuth: [] 
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: Unauthorized, user is not authenticated
+        "404":
+          description: User not found
+        "500":
+          description: Internal Server Error
+  /api/user/tasks:
+    get:
+      summary: User or employee see all their assigned tasks
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Get all tasks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Task"
+        "500":
+          description: Internal Server Error
+  /api/user/tasks/search-status:
+    get:
+      summary: User or employee search by task status
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: statuses
+          in: query
+          required: true
+          schema:
+            type: string
+          example: "in-progress,completed"
+      responses:
+        "200":
+          description: Task search by specified set status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Task"
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+  /api/user/tasks/{taskId}:
+    get:
+      summary: User view singe task
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Get one tasks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Task"
+        "500":
+          description: Internal Server Error
+  /api/user/tasks/update/{taskId}:
+    put:
+      summary: update task progress
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - pending
+                    - in-progress
+                    - completed
+              required:
+                - status
+      responses:
+        "200":
+          description: Update status
+        "400":
+          description: Bad Request
+        "404":
+          description: Tasks not found
+        "500":
+          description: Internal Server Error
+  /api/leader/projects:
+    get:
+      summary: Team leader see projects assigned to them by admin
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Get all projects
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Project"
+        "500":
+          description: Internal Server Error
+  /api/leader/tasks/{projectId}:
+    post:
+      summary: Leader create tasks and assign it to members
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                dueDate:
+                  type: string
+                  format: date
+                priority:
+                  type: string
+                  enum:
+                    - low
+                    - medium
+                    - high
+                assignedTo:
+                  type: string
+                  example: userid
+      responses:
+        "201":
+          description: Task successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+  /api/leader/tasks:
+    get:
+      summary: leader see all tasks
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Get all tasks
+        "500":
+          description: Internal Server Error
+  /api/leader/task/{taskId}:
+    get:
+      summary: leader view singe task
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Get one tasks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Task"
+        "500":
+          description: Internal Server Error
+  /api/leader/tasks/edit/{taskId}:
+    put:
+      summary: leader edit a task
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                dueData:
+                  type: string
+                  format: date
+                priority:
+                  type: string
+                  enum:
+                    - low
+                    - medium
+                    - high
+      responses:
+        "201":
+          description: Task successfully editted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+  /api/leader/tasks/delete/{taskId}:
+    delete:
+      summary: leader delete a task
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Delete success
+        "500":
+          description: Internal Server Error
+  /api/admin/users:
+    get:
+      summary: Admin see all users
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Get all users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/User"
+        "500":
+          description: Internal Server Error
+  /api/admin/groups:
+    get:
+      summary: Admin view all groups
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Get all groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  groups:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Group"
+        "500":
+          description: Internal Server Error
+
+  /api/admin/groups/add:
+    post:
+      summary: Admin create a new group
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              required:
+                - name
+      responses:
+        "201":
+          description: Group created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Group"
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+
+  /api/admin/groups/{groupId}:
+    get:
+      summary: Admin see single group by ID
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Get a group by ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Group"
+        "404":
+          description: Group not found
+        "500":
+          description: Internal Server Error
+
+  /api/admin/group/assign-leader/{groupId}:
+    put:
+      summary: Admin assign a leader to a group
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                leaderId:
+                  type: string
+              required:
+                - leaderId
+      responses:
+        "200":
+          description: Assign leader success
+        "400":
+          description: Bad Request
+        "404":
+          description: Group not found
+        "500":
+          description: Internal Server Error
+
+  /api/admin/group/assign-member/{groupId}:
+    put:
+      summary: Admin assign a member to a group
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                memberId:
+                  type: string
+              required:
+                - memberId
+      responses:
+        "200":
+          description: Assign member success
+        "400":
+          description: Bad Request
+        "404":
+          description: Group not found
+        "500":
+          description: Internal Server Error
+  /api/admin/projects:
+    post:
+      summary: Admin create a new project
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectName:
+                  type: string
+                groupId:
+                  type: string
+              required:
+                - projectName
+                - groupId
+      responses:
+        "201":
+          description: Project created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+        "400":
+          description: Bad Request
+        "404":
+          description: Group not found
+        "500":
+          description: Internal Server Error
+
+    get:
+      summary: Admin see all projects
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Get all projects
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  projects:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Project"
+        "500":
+          description: Internal Server Error

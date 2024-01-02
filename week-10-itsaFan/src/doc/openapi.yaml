@@ -1,0 +1,294 @@
+openapi: 3.0.0
+info:
+  title: Steffan-Week10-Api
+  version: 1.0.0
+  description: Steffan RevoU Week 10 Assignment Transfer Request Management Api Documentation
+servers:
+  - url: https://transfer-management-app-production.up.railway.app
+    description: Production or Deployment Server
+  - url: http://localhost:3000
+    description: Development server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: "Bearer with JWT Token"
+  schemas:
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 8
+          pattern: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]+$"
+        role:
+          type: string
+          enum:
+            - maker
+            - approver
+            - admin
+      required:
+        - username
+        - email
+    TransferRequest:
+      type: object
+      properties:
+        requesterId:
+          type: string
+        requester:
+          type: string
+        status:
+          type: string
+        amount:
+          type: number
+          minimum: 0
+        createdAt:
+          type: string
+          format: date-time
+        isDeleted:
+          type: boolean
+paths:
+  /api/register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "201":
+          description: User registered successfully
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+  /api/login:
+    post:
+      summary: Login or signin user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                  minLength: 8
+              required:
+                - username
+                - password
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized or Wrong Credentials
+        "500":
+          description: Internal Server Error
+  /api/transfer/add:
+    post:
+      summary: User create a new transfer request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  minimum: 1
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Transfer request successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransferRequest"
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+  /api/transfer/approve/{transferId}:
+    put:
+      summary: Approve a transfer request
+      parameters:
+        - name: transferId
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Transfer request successfully approved
+        "400":
+          description: Bad Request
+        "404":
+          description: Transfer Request not found
+        "500":
+          description: Internal Server Error
+  /api/transfer/reject/{transferId}:
+    put:
+      summary: Reject a transfer request
+      parameters:
+        - name: transferId
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Transfer request successfully rejected
+        "400":
+          description: Bad Request
+        "404":
+          description: Transfer Request not found
+        "500":
+          description: Internal Server Error
+  /api/transfer:
+    get:
+      summary: Get or see all transfer requests that are not soft deleted
+      responses:
+        "200":
+          description: Get all available transfer requests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transferRequests:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/TransferRequest"
+        "500":
+          description: Internal Server Error
+  /api/transfer/soft-delete/{transferId}:
+    put:
+      summary: Admin soft-delete a transfer request
+      parameters:
+        - name: transferId
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Transfer request successfully rejected
+        "400":
+          description: Bad Request
+        "404":
+          description: Transfer Request not found
+        "500":
+          description: Internal Server Error
+  /api/transfer/admin/transfer-lists:
+    get:
+      summary: admin to see all transfer requests on database
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Get all transfer requests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transferRequests:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/TransferRequest"
+        "500":
+          description: Internal Server Error
+  /api/transfer/search-date:
+    get:
+      summary: Admin search transfer requests using date range
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: startDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+          example: "2023-08-05"
+        - name: endDate
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+          example: "2023-08-26"
+      responses:
+        "200":
+          description: Transfer requests within the specified set date range
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transferRequests:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/TransferRequest"
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+
+  /api/transfer/search-status:
+    get:
+      summary: Admin search transfer requests by status
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: statuses
+          in: query
+          required: true
+          schema:
+            type: string
+          example: "pending,approved"
+      responses:
+        "200":
+          description: Transfer requests with the specified set status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transferRequests:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/TransferRequest"
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error

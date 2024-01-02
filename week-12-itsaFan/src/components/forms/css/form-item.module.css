@@ -1,0 +1,12 @@
+.items {
+    padding-bottom: 1rem;
+}
+
+.prevBtn {
+    margin-right: 0.25rem;
+}
+
+.error {
+    color: red;
+    padding-left: 0.25rem;
+}

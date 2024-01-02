@@ -1,0 +1,1 @@
+http://localhost:3000/click-jacking-xss?name=%3Cscript%3Ealert(%27hacked%27)%3C/script%3E

@@ -1,0 +1,82 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fashion Buyout Tracker</title>
+    <meta name="description" content="Fashion Financial Tracking App for user to input their buyout history and view them" />
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="header">
+      <div>
+        <img src="assets/images/itsaFan-logo-textWhite-01.svg" alt="SVG" width="200" height="200" />
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="">Home</a>
+          </li>
+          <li>
+            <a href="">Input</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <div class="center">
+        <h1>Financial Tracker</h1>
+      </div>
+      <div class="main-content">
+        <div class="grid-form">
+          <div class="form-container">
+            <div class="form">
+              <form id="financialForm">
+                <span class="heading">Financial Input</span>
+                <select name="type" id="type" class="input">
+                  <option value="new-item">New Item</option>
+                  <option value="second-item">Secondhand Item</option>
+                </select>
+                <input placeholder="First Name" type="text" id="firstName" class="input" required />
+                <input placeholder="Last Name" type="text" id="lastName" class="input" required />
+                <input placeholder="Product" type="text" id="product" class="input" required />
+                <input placeholder="Amount" type="number" id="amount" class="input" required />
+                <div class="button-container">
+                  <button class="send-button" type="submit" id="submitButton">Add</button>
+                  <div class="reset-button-container">
+                    <div id="reset-btn" class="reset-button"><button style="border: none; background: none; padding: 0; color: #fffffe;" type="reset">Reset</button></div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="grid-data">
+          <ul style="list-style: none">
+            <div id="financialDataDisplay">
+            </div>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <!--Footer -->
+    <footer>
+      <div class="footer">
+        <h3>Assignment Week 7</h4>
+        <p>Copyright 2023, Steffansim</p>
+        <div class="social-icon">
+          <a href="https://www.linkedin.com/in/steffansim/"><img src="assets/images/linkedin.svg" alt="linkedin-icon" /></a>
+          <a href=""><img src="assets/images/facebook.svg" alt="fb-icon" /></a>
+          <a href=""><img src="assets/images/ig.svg" alt="ig-icon" /></a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="src/index.js"></script>
+  </body>
+</html>

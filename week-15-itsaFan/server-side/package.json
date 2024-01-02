@@ -1,0 +1,41 @@
+{
+  "name": "week-11-itsafan",
+  "version": "1.0.0",
+  "description": "Steffansim - Week 11 - Mini Project - Team Collaboration App",
+  "scripts": {
+    "start": "node ./src/app.js",
+    "test": "mocha --exit ./tests/**/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RevoU-FSSE-2/week-11-itsaFan.git"
+  },
+  "keywords": [],
+  "author": "Steffansim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RevoU-FSSE-2/week-11-itsaFan/issues"
+  },
+  "homepage": "https://github.com/RevoU-FSSE-2/week-11-itsaFan#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "escape-html": "^1.0.3",
+    "express": "^4.18.2",
+    "express-openapi-validator": "^5.0.6",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.4.5",
+    "morgan": "^1.10.0",
+    "swagger-ui-express": "^5.0.0",
+    "uuid": "^9.0.1",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3"
+  }
+}
